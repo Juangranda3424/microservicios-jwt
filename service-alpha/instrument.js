@@ -1,17 +1,11 @@
 // src/instrument.js
 import * as Sentry from "@sentry/node";
-import dotenv from "dotenv";
 
-dotenv.config();
+// Sentry se encargará de inicializarse antes que Express gracias al comando --import
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  environment: process.env.NODE_ENV || "development",
+  tracesSampleRate: 1.0,
+});
 
-if (process.env.SENTRY_DSN) {
-  Sentry.init({
-    dsn: process.env.SENTRY_DSN,
-    environment: process.env.NODE_ENV || "development",
-    // Control de trazas (1.0 significa capturar el 100% en desarrollo)
-    tracesSampleRate: 1.0, 
-  });
-  console.log("Sentry inicializado correctamente.");
-} else {
-  console.warn("Sentry DSN no configurado en las variables de entorno.");
-}
+console.log("🚀 Sentry inicializado correctamente de forma nativa (ESM).");
