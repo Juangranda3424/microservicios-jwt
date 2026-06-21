@@ -19,6 +19,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@sentry/node": "^10.59.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
